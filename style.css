@@ -1,0 +1,45 @@
+
+     header {
+      text-align: center;
+      background: url('https://scontent.ford1-1.fna.fbcdn.net/hphotos-xfa1/v/t1.0-9/1918165_600236968627_8180528_n.jpg?oh=eda8b3968ed3785250564544dfdb8e20&oe=571093A9');
+      background-size: cover;
+	  background-position: center;	  
+      color: white;
+    } 
+
+    body {
+          background: #f54;
+    }
+    a {
+      color: blue;
+    }
+    h1 {
+      font-size: 66px;
+    }
+    img {
+      margin: 0px 0px 0px 0px;
+      border: 3px solid white;
+      border-radius: 6px;
+    }
+    ul {
+      padding: 10px;      
+    }
+    li {
+      display: inline;
+      padding: 0px 10px 0px 0px;
+    }
+    article {
+      max-width: 1500px;
+      padding: 20px;
+      margin: 0 auto;
+    }
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 36px;
+        padding: 5px;
+      }
+      li {
+        padding: 5px;
+        display: block;
+      }
+    }
