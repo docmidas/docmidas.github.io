@@ -36,10 +36,7 @@ document.body.appendChild(explain2);
 var overlay = document.createElement('img');
     overlay.src = "sprites/overlay.png";
     overlay.style.zIndex = 5;
-document.body.appendChild(overlay); 
-
-
-
+document.body.appendChild(overlay);
 
 var myAi;
 
@@ -69,6 +66,18 @@ startButton2.addEventListener("click", function(){
 
 var health = 100;
 
+var retryButton = document.createElement('button');
+retryButton.innerHTML ="<h1>1 Retry</h1>";
+retryButton.style.left = "500px";
+retryButton.style.top = "300px";
+
+retryButton.addEventListener("click", function(){
+  console.log("Button clicked");
+  // runGame();
+  document.body.removeChild(retryButton);
+  document.location.reload(true);
+})
+
 function runGame(){
 //REMOVE INTRO ELEMENTS  
 document.body.removeChild(elem);
@@ -79,7 +88,6 @@ document.body.removeChild(startButton2);
 document.body.removeChild(explain1);
 document.body.removeChild(explain2);
 
-
 var myEngine;
 var p1Jumping = false;
 var jumpHeight = 110;
@@ -88,12 +96,10 @@ var jumpCooled = true;
 var startBlastX = 650;
 var startBlastY = 125;
 
-
 var blastPosX = 750;
 var blastPosY = 25;
 var yHitBlast  =false;
 var xHitBlast = false;
-
 
 var blast = document.createElement('img');  
   blast.src = "sprites/blast.gif";
@@ -108,6 +114,8 @@ var spark = document.createElement('img');
     spark.style.zIndex= 100;
     spark.src = "sprites/spark.gif";
     spark.style.position = "absolute";
+    spark.style.width =  300+ "px";
+    spark.style.height = 300 + "px";
     
 
 var bgMusic = document.getElementById("bgMusic");
@@ -125,7 +133,6 @@ var coin;
 var xHit = false;
 var yHit = false;
 
-
 var bgPosX = 0;
 var bg2PosX = 2000;
 var bgPic2 = document.createElement('img');  
@@ -134,8 +141,7 @@ var bgPic2 = document.createElement('img');
   bgPic2.style.zIndex = -5;
   bgPic2.style.left = bg2PosX + 'px';
   bgPic2.style.top = 0 + 'px';
-  document.body.appendChild(bgPic2);
- 
+  document.body.appendChild(bgPic2); 
 
 var scoreBoard = document.createElement('p'); 
 scoreBoard.style.position = "absolute";
@@ -230,9 +236,7 @@ function cpuTimer(){
       jetShoot();
     }
   }
-
 }
-
 
 //Control Movements
 window.onkeyup = function(e) {
@@ -250,7 +254,7 @@ window.onkeyup = function(e) {
         } 
 
       setTimeout(function(){elem.src = "sprites/girlRun.gif";}, 1500);      
-   } else if(key == 39){ // RIGHT
+   } else if(key == 68){ // RIGHT
         //elem.style.transform= 'scaleX(1)'; 
         //playerPosX += 15; 
    } else if(key == 40){ //DOWN
@@ -267,14 +271,12 @@ window.onkeyup = function(e) {
 //JET SHOOTS
 function jetShoot(){
   if(blastStatus == false){
-
     blastShot.play();  
     badJet.style.left = BadJetStartX - 120 + "px";  
     badJet.src = "sprites/jetShoot.gif";
     
         setTimeout(function(){badJet.src = "sprites/jetFlyIdle.gif";
-          badJet.style.left = BadJetStartX + "px";
-        
+          badJet.style.left = BadJetStartX + "px";        
         }, 400);
         
         genBlast();
@@ -332,7 +334,8 @@ function shiftObjects() {
 function genCoin(x,y) {
   
   coin = document.createElement('img');
-  coin.src = "sprites/chest.png";
+  //coin.src = "sprites/chest.png";
+  coin.src = "sprites/coinSpin.gif";
   coin.style.position = "absolute";
   
   coin.style.left = x + 'px';
@@ -374,9 +377,14 @@ function collisionTests() {
       scoreBoard.textContent = "Score: " + scoreValue;      
       document.body.removeChild(coin);
 
-      spark.style.left = coinPosX + 20 + "px";
-      spark.style.top = coinPosY - 60 + "px";
+      spark.style.left = coinPosX - 80 + "px";
+      spark.style.top = coinPosY - 260 + "px";
+      
       document.body.appendChild(spark);
+      // for(var g = 5; g < 10; g++){
+      //   spark.style.width *= g + "px";
+      //   spark.style.height *= g + "px";
+      // }
       setTimeout(function(){document.body.removeChild(spark)}, 600);
       xHit = false;
       yHit = false;
@@ -427,8 +435,10 @@ function collisionTests() {
           girlScream.play();
           setTimeout(function(){ //wait til dying animation finishes to clear screen
             clearTimeout(myEngine);
+            
             document.body.removeChild(elem);
-            document.location.reload(true);
+            //document.location.reload(true);
+            endGameScreen();
 
           }, 900);
         }    
@@ -445,9 +455,10 @@ function collisionTests() {
     }
   }
 }
-
-
 }/// END OF RUNGAME
-  
+
+function endGameScreen(){
+  document.body.appendChild(retryButton);
 
 
+}
