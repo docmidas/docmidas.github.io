@@ -47,7 +47,7 @@ startButton.style.top = "300px";
 document.body.appendChild(startButton);
 
 startButton.addEventListener("click", function(){
-  console.log("Button clicked");
+
   runGame();
 })
 
@@ -58,7 +58,7 @@ startButton2.style.top = "300px";
 document.body.appendChild(startButton2);
 
 startButton2.addEventListener("click", function(){
-  console.log("Button 2 clicked");
+
   singlePlayer = false;
   runGame();
 
@@ -67,12 +67,12 @@ startButton2.addEventListener("click", function(){
 var health = 100;
 
 var retryButton = document.createElement('button');
-retryButton.innerHTML ="<h1>1 Retry</h1>";
+retryButton.innerHTML ="<h1>Retry</h1>";
 retryButton.style.left = "500px";
 retryButton.style.top = "300px";
 
 retryButton.addEventListener("click", function(){
-  console.log("Button clicked");
+
   // runGame();
   document.body.removeChild(retryButton);
   document.location.reload(true);
@@ -177,24 +177,6 @@ genCoin(1500, Math.round(Math.random() * maxHeight) + 150) ;
 
 ////////////
 /////Move enviornment WORKING
-// setInterval(function() {  
-
-//   shiftObjects();
-//   bgPosX -= 10;
-//   bg2PosX -= 10;
-//   bgPic.style.left =  bgPosX + 'px';
-//   bgPic2.style.left =  bg2PosX + 'px';
-//   //window.requestAnimationFrame();
-//   if(bgPosX <= -2000){    
-//     bgPosX = 2000;
-//   }
-//   if(bg2PosX <= -2000){
-//     bg2PosX = 2000;
-//   }
-// }, 50) 
-///////////// WORKING THROUGH HERE
-//Try2
-
 myEngine = setInterval(moveEnvironment, 50);
 
 /////Move enviornment
@@ -213,7 +195,6 @@ function moveEnvironment() {
     bg2PosX = 2000;
   };
 } 
-//////END EXPERIMENT
 //////////////////////
 
 //////////////
@@ -231,7 +212,7 @@ myAi = setInterval(cpuTimer, 1500);
 function cpuTimer(){
   if(singlePlayer == true){
     var cpuShoot = Math.round(Math.random());
-    console.log(cpuShoot);
+  
     if(cpuShoot % 2 == 0){
       jetShoot();
     }
@@ -241,7 +222,7 @@ function cpuTimer(){
 //Control Movements
 window.onkeyup = function(e) {
    var key = e.keyCode;
-   console.log(key);
+ 
    
    if(key == 37){ //LEFT
       // elem.style.transform= 'scaleX(-1)'; 
@@ -291,14 +272,14 @@ function jump(){
     if(playerPosY > jumpHeight) {
       
       playerPosY -= 5;
-      //console.log("going up" + playerPosY);
+      
       elem.style.top = playerPosY + 'px';
       window.requestAnimationFrame(jump);
-      //console.log("STILL GOING UPPP");
+      
       return;
     };
     if(playerPosY <= jumpHeight){
-      //console.log("ESCAPED, Run GRAV");
+      
       gravity();
     }
     return;   
@@ -307,7 +288,7 @@ function jump(){
 function gravity() {
   if(playerPosY != groundLevel) {
       playerPosY += 10;
-      //console.log("going down: " + playerPosY);
+      
       elem.style.top = playerPosY + 'px';
       window.requestAnimationFrame(gravity);
   } else if(playerPosY == groundLevel){
@@ -334,17 +315,13 @@ function shiftObjects() {
 function genCoin(x,y) {
   
   coin = document.createElement('img');
-  //coin.src = "sprites/chest.png";
   coin.src = "sprites/coinSpin.gif";
   coin.style.position = "absolute";
   
   coin.style.left = x + 'px';
   coin.style.top = y + 'px';
   coinPosX = x;
-  coinPosY = y;
-  // console.log("x position: " + coinPosX);
-  // console.log("y position: " + coinPosY);
-    
+  coinPosY = y;    
   document.body.appendChild(coin);  
   };  
 
@@ -354,9 +331,7 @@ function genCoin(x,y) {
     blast.style.left = blastPosX + 'px';
     blast.style.top = blastPosY + 'px';
     document.body.appendChild(blast);    
-  }; 
-  
-  
+  };  
 
 function collisionTests() {
   for(var c = 80; c <= 120; c++ ){
@@ -371,7 +346,7 @@ function collisionTests() {
   } 
 
   if(xHit && yHit ){
-      //console.log('yay, you got a coin');      
+      
       caching.play();      
       scoreValue += 100;      
       scoreBoard.textContent = "Score: " + scoreValue;      
@@ -381,10 +356,6 @@ function collisionTests() {
       spark.style.top = coinPosY - 260 + "px";
       
       document.body.appendChild(spark);
-      // for(var g = 5; g < 10; g++){
-      //   spark.style.width *= g + "px";
-      //   spark.style.height *= g + "px";
-      // }
       setTimeout(function(){document.body.removeChild(spark)}, 600);
       xHit = false;
       yHit = false;
@@ -395,7 +366,6 @@ function collisionTests() {
     };
 
   if(coinPosX < -100) {
-    //console.log('Awww, you missed a coin');
     document.body.removeChild(coin);
     genCoin( 1000, Math.round(Math.random() * maxHeight) +150) ;
   };
@@ -414,15 +384,12 @@ function collisionTests() {
     } 
 
     if(xHitBlast && yHitBlast ){
-        console.log('Awww, you got blasted');
+      
         blastImpact.play();
         elem.src = "sprites/girlInjured.gif";
         setTimeout(function(){elem.src = "sprites/girlRun.gif";}, 900);
-        health -= 34;
-        //caching.play();      
-        //scoreValue += 100;      
+        health -= 34;     
         healthBoard.textContent = "Health: " + health;      
-        //document.body.removeChild(blast);
         blastStatus = false;
         document.body.removeChild(blast);
         blastPosX = startBlastX;
@@ -434,12 +401,9 @@ function collisionTests() {
         if(health <= 0){ 
           girlScream.play();
           setTimeout(function(){ //wait til dying animation finishes to clear screen
-            clearTimeout(myEngine);
-            
+            clearTimeout(myEngine);            
             document.body.removeChild(elem);
-            //document.location.reload(true);
             endGameScreen();
-
           }, 900);
         }    
     }else{
@@ -447,7 +411,7 @@ function collisionTests() {
           yHitBlast = false;
     };  
     if(blastPosX < 50 && blastStatus == true) {
-      console.log('MISSED HIT');
+    
       document.body.removeChild(blast);
       blastStatus = false;
       blastPosX = startBlastX;
