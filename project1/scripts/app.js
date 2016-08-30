@@ -73,7 +73,6 @@ retryButton.style.top = "300px";
 
 retryButton.addEventListener("click", function(){
 
-  // runGame();
   document.body.removeChild(retryButton);
   document.location.reload(true);
 })
