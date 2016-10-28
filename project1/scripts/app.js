@@ -10,7 +10,7 @@ var elem = document.createElement('img');
 document.body.appendChild(elem);   
 
 var explain1 = document.createElement('p');
-explain1.innerHTML ="<h1>1 player mode<br>-press  W  to jump<br>-collect treasure<br>-avoid shots!</h1>";
+explain1.innerHTML ="<h1>1 player mode<br>-RELEASE  W  to jump<br>-collect treasure<br>-avoid shots!</h1>";
 explain1.style.left = playerPosX + 190 + "px";
 explain1.style.top = playerPosY - 40 +"px";
 document.body.appendChild(explain1);
